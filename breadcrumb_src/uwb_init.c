@@ -1,6 +1,8 @@
 #include "uwb_bread.h"
 
 volatile bool interrupt_flag;
+int pcitx;
+int pcirx;
 
 //pretty sure this is the same as tx. need to clean up
 static dwt_config_t config = {
@@ -57,6 +59,10 @@ void breadcrumb_dwm_init(){
 
   /* Set preamble timeout for expected frames.  */
   //dwt_setpreambledetecttimeout(PRE_TIMEOUT);
+
+  dwt_setrxaftertxdelay(POLL_TX_TO_RESP_RX_DLY_UUS);
+  //dwt_setrxtimeout(65000); // Maximum value timeout with DW1000 is 65ms  
+
 
   dwt_setrxtimeout(0);    // set to NO receive timeout for this simple example   
   interrupt_flag=false;

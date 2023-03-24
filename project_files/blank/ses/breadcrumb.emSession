@@ -2,6 +2,7 @@
 <session>
  <Bookmarks/>
  <Breakpoints groups="Breakpoints" active_group="Breakpoints">
+  <BreakpointListItem trigger="" line="149" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../../../breadcrumb_src/uwb_bread.c" useHWbreakpoint="false"/>
   <Exceptions set="MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault"/>
  </Breakpoints>
  <ExecutionProfileWindow/>
@@ -25,7 +26,10 @@
   <ProjectSessionItem path="breadcrumb;breadcrumb"/>
   <ProjectSessionItem path="breadcrumb;breadcrumb;Application"/>
   <ProjectSessionItem path="breadcrumb;breadcrumb;bread_src"/>
+  <ProjectSessionItem path="breadcrumb;breadcrumb;Deca"/>
+  <ProjectSessionItem path="breadcrumb;breadcrumb;None"/>
   <ProjectSessionItem path="breadcrumb;breadcrumb;nRF_Drivers"/>
+  <ProjectSessionItem path="breadcrumb;breadcrumb;rtt_input"/>
  </Project>
  <Register1>
   <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="breadcrumb_Debug" decimalNodes="" octalNodes="" unsignedNodes=""/>
@@ -58,15 +62,19 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="99" useTextEdit="1" path="../../../main.c" left="0" selected="1" top="85" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../breadcrumb_src/uwb_bread.c" left="0" top="51" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../breadcrumb_src/uwb_rx.c" left="0" top="0" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="4" y="21" useTextEdit="1" path="../../../breadcrumb_src/uwb_tx.c" left="0" top="4" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="207" useTextEdit="1" path="../../../main.c" left="0" top="194" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="8" y="122" useTextEdit="1" path="../../../breadcrumb_src/uwb_bread.c" left="0" selected="1" top="114" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="24" useTextEdit="1" path="../../../breadcrumb_src/uwb_rx.c" left="0" top="6" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="4" y="21" useTextEdit="1" path="../../../breadcrumb_src/uwb_tx.c" left="0" top="8" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../rtt_input/rtt_input.c" left="0" top="42" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../components/libraries/log/src/nrf_log_frontend.c" left="0" top="32" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="39" y="68" useTextEdit="1" openedFrom="C:/nrf_sdk/examples/myprojects/breadcrumb/main.c" path="../../../../../../modules/nrfx/hal/nrf_nvmc.h" left="0" top="74" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="39" y="68" useTextEdit="1" openedFrom="C:/nrf_sdk/examples/myprojects/breadcrumb/main.c" path="../../../../../../modules/nrfx/hal/nrf_nvmc.h" left="0" top="68" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="13" y="4" useTextEdit="1" path="../../../breadcrumb_src/flash_util.c" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="19" y="10" useTextEdit="1" openedFrom="C:/nrf_sdk/examples/myprojects/breadcrumb/breadcrumb_src/flash_util.c" path="../../../breadcrumb_src/flash_util.h" left="0" top="2" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="109" useTextEdit="1" path="../../../../../../modules/nrfx/mdk/ses_startup_nrf_common.s" left="0" top="96" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="302" useTextEdit="1" path="../../../../../../modules/nrfx/drivers/src/nrfx_timer.c" left="0" top="289" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="120" useTextEdit="1" path="../../../deca_driver/port/port_platform.c" left="0" top="104" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="1066" useTextEdit="1" path="../../../deca_driver/deca_device.c" left="0" top="1053" codecName="Default"/>
  </Files>
- <EMStudioWindow activeProject="breadcrumb" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/nrf_sdk/modules/nrfx/hal" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <EMStudioWindow activeProject="breadcrumb" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="C:/nrf_sdk/modules/nrfx/hal" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

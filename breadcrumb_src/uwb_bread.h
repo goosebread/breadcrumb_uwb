@@ -25,8 +25,15 @@
 //longest length available in UWB standard
 #define MAP_PACKET_LENGTH 127
 
+/* Inter-ranging delay period, in milliseconds. */
+#define RNG_DELAY_MS 500
+
 extern volatile bool interrupt_flag;
 extern volatile uint8_t rx_data_buffer[MAP_PACKET_LENGTH];
+
+static const uint8_t preambleCodeList[4] = {9,10,11,12};
+extern int pcitx;
+extern int pcirx;
 
 //maybe also global buffer index for router queue buffer
 
@@ -37,10 +44,6 @@ extern volatile uint8_t rx_data_buffer[MAP_PACKET_LENGTH];
 #define POLL_TX_TO_RESP_RX_DLY_UUS 100 
 
 #define APP_NAME "SS TWR INIT v1.3"
-
-/* Inter-ranging delay period, in milliseconds. */
-#define RNG_DELAY_MS 500
-
 
 /* Length of the common part of the message (up to and including the function code, see NOTE 1 below). */
 #define ALL_MSG_COMMON_LEN 10
@@ -82,5 +85,8 @@ void changePreambleCode(uint8_t tx_code,uint8_t rx_code);
 void breadcrumb_dwm_init(void);
 
 void rxUWB(void);
+
+void doRanging(void);
+void handleRxRanging(void);
 
 #endif /* UWB_BREAD_H__ */

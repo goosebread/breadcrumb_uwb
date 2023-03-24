@@ -7,6 +7,15 @@ volatile uint8_t rx_data_buffer[MAP_PACKET_LENGTH];
 /* Hold copy of status register state here for reference so that it can be examined at a debug breakpoint. */
 static uint32 status_reg = 0;
 
+void handleRxData(uint32_t frame_len){
+    for(int i=0;i<frame_len;i++){//hope this works and doesn't take forever
+            SEGGER_RTT_printf(0, "%x, ",rx_data_buffer[i]);
+        }
+        SEGGER_RTT_printf(0, "\n");
+
+        relayUWB();
+}
+
 void rxUWB(){
 
   // Activate reception immediately. 
@@ -31,26 +40,28 @@ void rxUWB(){
 
   if (status_reg & SYS_STATUS_RXFCG)
   {
-
+    SEGGER_RTT_printf(0, "frame rx\n");
     uint32 frame_len;
 
     /* Clear good RX frame event in the DW1000 status register. */
     dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_RXFCG);
 
+    uint32_t finfo = dwt_read32bitreg(RX_FINFO_ID);
     /* A frame has been received, read it into the local buffer. */
-    frame_len = dwt_read32bitreg(RX_FINFO_ID) & RX_FINFO_RXFL_MASK_1023;
+    frame_len = finfo & RX_FINFO_RXFL_MASK_1023;
     
     if (frame_len <= RX_BUFFER_LEN)
     {
       dwt_readrxdata(rx_data_buffer, frame_len, 0);
     }
 
-    for(int i=0;i<frame_len;i++){//hope this works and doesn't take forever
-        SEGGER_RTT_printf(0, "%x, ",rx_data_buffer[i]);
+    //check if ranging or data
+    if(finfo & RX_FINFO_RNG){
+        handleRxRanging();
     }
-    SEGGER_RTT_printf(0, "\n");
-
-    relayUWB();
+    else{
+        handleRxData(frame_len);
+    }
   }
     else
   {
@@ -62,3 +73,4 @@ void rxUWB(){
   }
 
 }
+

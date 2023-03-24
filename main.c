@@ -83,10 +83,6 @@ static inline void led_write(uint32_t led_idx, bool val){
     else{bsp_board_led_off(led_idx);}
 }
 
-static uint8_t preambleCodeList[4] = {9,10,11,12};
-static int pcitx = 0;
-static int pcirx = 0;
-
 //WARNING we will need to change how they are stored if preamble channel needs
 //more than a 2 bits
 void storeChannelSettings(){
@@ -156,16 +152,14 @@ static void button_event_handler(uint32_t button_number)
             interrupt_flag = true;
             break;
         }
-/*
+
         case 4:
         {   
-            //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "reset disabled.\n");
-            //break;
-
-            __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "The device is unprovisioned. Resetting has no effect.\n");
-            
+            SEGGER_RTT_printf(0, "Run Ranging\n");
+            app_sched_event_put(NULL, 0, doRanging);
+            interrupt_flag = true;
             break;
-        }*/
+        }
 
         default:
             SEGGER_RTT_printf(0, "Invalid Key\n");
