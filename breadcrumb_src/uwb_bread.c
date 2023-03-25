@@ -134,7 +134,6 @@ void handleRxRanging(){
             /* Increment frame sequence number after transmission of the poll message (modulo 256). */
             rx_frame_seq_nb++;
 
-            changePreambleCode(preambleCodeList[pcitx], preambleCodeList[pcirx]);
         } else {
             /* If we end up in here then we have not succeded in transmitting the packet we sent up.
             POLL_RX_TO_RESP_TX_DLY_UUS is a critical value for porting to different processors.
@@ -149,12 +148,17 @@ void handleRxRanging(){
             dwt_rxreset();
         }
     }
+    changePreambleCode(preambleCodeList[pcitx], preambleCodeList[pcirx]);
 }
 
 void doRanging(void){
+    changePreambleCode(preambleCodeList[pcitx], preambleCodeList[pcitx]);
+    dwt_setrxtimeout(65000);
     for(int i=0; i<3; i++){
         rangeRequest();
     }
+    changePreambleCode(preambleCodeList[pcitx], preambleCodeList[pcirx]);
+    dwt_setrxtimeout(0);
 }
 
 void rangeRequest(void)
@@ -162,12 +166,13 @@ void rangeRequest(void)
   dwt_forcetrxoff();
 
   target_node++;
-  SEGGER_RTT_printf(0, "node %d\n",target_node);
 
   if(target_node >= 4)
   {
     target_node = 1;
   }
+  SEGGER_RTT_printf(0, "node %d\n",target_node);
+
   /*Calling Function to select which node the Initiator will poll for a ranging response*/
   target_node_select(target_node); 
 

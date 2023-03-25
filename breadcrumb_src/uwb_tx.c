@@ -22,7 +22,7 @@ void writeUWBFromRTT(){
     SEGGER_RTT_printf(0, "tx sent");
 
     interrupt_flag=false;
-    deca_sleep(10);//this slight pause of 10 ms might not be needed
+    deca_sleep(5);//this slight pause of 10 ms might not be needed
 }
 
 void relayUWB(){
@@ -36,5 +36,5 @@ void relayUWB(){
     //SEGGER_RTT_printf(0, "relay sent");
 
     interrupt_flag=false;
-    deca_sleep(10);//this slight pause of 10 ms might not be needed
+    deca_sleep(5);//this slight pause of 10 ms might not be needed
 }

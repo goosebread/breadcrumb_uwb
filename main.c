@@ -59,7 +59,7 @@
 #include "app_scheduler.h"
 #include "uwb_bread.h"
 
-#define RTT_INPUT_POLL_PERIOD_MS 50
+#define RTT_INPUT_POLL_PERIOD_MS 20
 
 #define SCHED_MAX_EVENT_DATA_SIZE   sizeof(int)
 #define SCHED_QUEUE_SIZE            10
@@ -99,6 +99,7 @@ void loadChannelSettings(){
     led_write(BSP_BOARD_LED_2,pcitx & 0x1);
     led_write(BSP_BOARD_LED_1,pcirx & 0x2);
     led_write(BSP_BOARD_LED_0,pcirx & 0x1);
+    changePreambleCode(preambleCodeList[pcitx], preambleCodeList[pcirx]);
 }
 
 void case1fun(){
@@ -199,12 +200,12 @@ static void initialize(void)
 }
 
 static void start(void)
-{
+{  
     //listen to rtt connection
     rtt_input_enable(app_rtt_input_handler, RTT_INPUT_POLL_PERIOD_MS);
 }
 
-int main(void)
+int main(void) 
 {
     initialize();
     start();

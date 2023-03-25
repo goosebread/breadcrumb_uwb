@@ -8,12 +8,15 @@ volatile uint8_t rx_data_buffer[MAP_PACKET_LENGTH];
 static uint32 status_reg = 0;
 
 void handleRxData(uint32_t frame_len){
-    for(int i=0;i<frame_len;i++){//hope this works and doesn't take forever
-            SEGGER_RTT_printf(0, "%x, ",rx_data_buffer[i]);
+    //1 ttl byte, 2 crc bytes
+    for(int i=1;i<frame_len-2;i++){//hope this works and doesn't take forever
+            SEGGER_RTT_printf(0, "%x,",rx_data_buffer[i]);
         }
         SEGGER_RTT_printf(0, "\n");
-
+  uint8_t ttl = rx_data_buffer[0]--;
+  if(ttl){
         relayUWB();
+  }
 }
 
 void rxUWB(){
