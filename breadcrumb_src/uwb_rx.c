@@ -43,7 +43,7 @@ void rxUWB(){
 
   if (status_reg & SYS_STATUS_RXFCG)
   {
-    SEGGER_RTT_printf(0, "frame rx\n");
+    //SEGGER_RTT_printf(0, "frame rx\n");
     uint32 frame_len;
 
     /* Clear good RX frame event in the DW1000 status register. */

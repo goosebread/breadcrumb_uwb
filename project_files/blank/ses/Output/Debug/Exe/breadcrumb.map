@@ -7624,7 +7624,7 @@ Linker script and memory map
                 0x0000000000000001                . = ASSERT (((__init_rodata_start__ == __init_rodata_end__) || ((__init_rodata_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .init_rodata is too large to fit in FLASH1 memory segment)
                 0x00000000000003cc                __text_load_start__ = ALIGN (__init_rodata_end__, 0x4)
 
-.text           0x00000000000003cc     0x5d44
+.text           0x00000000000003cc     0x5d38
                 0x00000000000003cc                __text_start__ = .
  *(.text .text.* .gnu.linkonce.t.* .glue_7t .glue_7 .gcc_except_table .ARM.extab* .gnu.linkonce.armextab.*)
  .glue_7        0x00000000000003cc        0x0 linker stubs
@@ -8229,70 +8229,70 @@ Linker script and memory map
  .text.handleRxData
                 0x0000000000005970       0x6c Output/Debug/Obj/breadcrumb/uwb_rx.o
                 0x0000000000005970                handleRxData
- .text.rxUWB    0x00000000000059dc       0xc0 Output/Debug/Obj/breadcrumb/uwb_rx.o
+ .text.rxUWB    0x00000000000059dc       0xb4 Output/Debug/Obj/breadcrumb/uwb_rx.o
                 0x00000000000059dc                rxUWB
  .text.readRTTBuf
-                0x0000000000005a9c       0x20 Output/Debug/Obj/breadcrumb/uwb_tx.o
-                0x0000000000005a9c                readRTTBuf
+                0x0000000000005a90       0x20 Output/Debug/Obj/breadcrumb/uwb_tx.o
+                0x0000000000005a90                readRTTBuf
  .text.writeUWBFromRTT
-                0x0000000000005abc       0x50 Output/Debug/Obj/breadcrumb/uwb_tx.o
-                0x0000000000005abc                writeUWBFromRTT
+                0x0000000000005ab0       0x50 Output/Debug/Obj/breadcrumb/uwb_tx.o
+                0x0000000000005ab0                writeUWBFromRTT
  .text.relayUWB
-                0x0000000000005b0c       0x44 Output/Debug/Obj/breadcrumb/uwb_tx.o
-                0x0000000000005b0c                relayUWB
+                0x0000000000005b00       0x44 Output/Debug/Obj/breadcrumb/uwb_tx.o
+                0x0000000000005b00                relayUWB
  .text.readWordFlash
-                0x0000000000005b50        0xa Output/Debug/Obj/breadcrumb/flash_util.o
-                0x0000000000005b50                readWordFlash
+                0x0000000000005b44        0xa Output/Debug/Obj/breadcrumb/flash_util.o
+                0x0000000000005b44                readWordFlash
  .text.writeWordFlash
-                0x0000000000005b5a       0x24 Output/Debug/Obj/breadcrumb/flash_util.o
-                0x0000000000005b5a                writeWordFlash
- *fill*         0x0000000000005b7e        0x2 
+                0x0000000000005b4e       0x24 Output/Debug/Obj/breadcrumb/flash_util.o
+                0x0000000000005b4e                writeWordFlash
+ *fill*         0x0000000000005b72        0x2 
  .text.libc.__aeabi_dadd
-                0x0000000000005b80      0x240 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(floatasmops_arm.o)
-                0x0000000000005b80                __aeabi_dadd
+                0x0000000000005b74      0x240 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(floatasmops_arm.o)
+                0x0000000000005b74                __aeabi_dadd
  .text.libc.__aeabi_dsub
-                0x0000000000005dc0        0x8 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(floatasmops_arm.o)
-                0x0000000000005dc0                __aeabi_dsub
+                0x0000000000005db4        0x8 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(floatasmops_arm.o)
+                0x0000000000005db4                __aeabi_dsub
  .text.libc.__aeabi_dmul
-                0x0000000000005dc8      0x130 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(floatasmops_arm.o)
-                0x0000000000005dc8                __aeabi_dmul
+                0x0000000000005dbc      0x130 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(floatasmops_arm.o)
+                0x0000000000005dbc                __aeabi_dmul
  .text.libc.__aeabi_d2iz
-                0x0000000000005ef8       0x4c C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(floatasmops_arm.o)
-                0x0000000000005ef8                __aeabi_d2iz
+                0x0000000000005eec       0x4c C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(floatasmops_arm.o)
+                0x0000000000005eec                __aeabi_d2iz
  .text.libc.__aeabi_i2d
-                0x0000000000005f44       0x24 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(floatasmops_arm.o)
-                0x0000000000005f44                __aeabi_i2d
+                0x0000000000005f38       0x24 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(floatasmops_arm.o)
+                0x0000000000005f38                __aeabi_i2d
  .text.libc.__aeabi_f2d
-                0x0000000000005f68       0x34 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(floatasmops_arm.o)
-                0x0000000000005f68                __aeabi_f2d
+                0x0000000000005f5c       0x34 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(floatasmops_arm.o)
+                0x0000000000005f5c                __aeabi_f2d
  .text.libc.__aeabi_d2f
-                0x0000000000005f9c       0x4c C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(floatasmops_arm.o)
-                0x0000000000005f9c                __aeabi_d2f
+                0x0000000000005f90       0x4c C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(floatasmops_arm.o)
+                0x0000000000005f90                __aeabi_d2f
  .text.libc.memcpy
-                0x0000000000005fe8       0x64 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(strasmops_arm.o)
-                0x0000000000005fe8                __aeabi_memcpy
-                0x0000000000005fe8                memcpy
-                0x000000000000600a                __aeabi_memcpy8
-                0x000000000000600a                __aeabi_memcpy4
+                0x0000000000005fdc       0x64 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(strasmops_arm.o)
+                0x0000000000005fdc                __aeabi_memcpy
+                0x0000000000005fdc                memcpy
+                0x0000000000005ffe                __aeabi_memcpy8
+                0x0000000000005ffe                __aeabi_memcpy4
  .text.libc.__aeabi_memclr
-                0x000000000000604c       0x68 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(strasmops_arm.o)
-                0x000000000000604c                __aeabi_memclr8
-                0x000000000000604c                __aeabi_memclr
-                0x000000000000604c                __aeabi_memclr4
-                0x000000000000604e                __aeabi_memset4
-                0x000000000000604e                __aeabi_memset8
-                0x000000000000604e                __aeabi_memset
-                0x0000000000006054                memset
+                0x0000000000006040       0x68 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(strasmops_arm.o)
+                0x0000000000006040                __aeabi_memclr8
+                0x0000000000006040                __aeabi_memclr
+                0x0000000000006040                __aeabi_memclr4
+                0x0000000000006042                __aeabi_memset4
+                0x0000000000006042                __aeabi_memset8
+                0x0000000000006042                __aeabi_memset
+                0x0000000000006048                memset
  .text.libc.memcmp
-                0x00000000000060b4       0x46 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(strops.o)
-                0x00000000000060b4                memcmp
- *fill*         0x00000000000060fa        0x2 
+                0x00000000000060a8       0x46 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(strops.o)
+                0x00000000000060a8                memcmp
+ *fill*         0x00000000000060ee        0x2 
  .text.__SEGGER_RTL_init_heap
-                0x00000000000060fc       0x14 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/heapops_basic_v7em_little.a(heapops_basic.o)
-                0x00000000000060fc                __SEGGER_RTL_init_heap
-                0x0000000000006110                __text_end__ = (__text_start__ + SIZEOF (.text))
-                0x0000000000005d44                __text_size__ = SIZEOF (.text)
-                0x0000000000006110                __text_load_end__ = __text_end__
+                0x00000000000060f0       0x14 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/heapops_basic_v7em_little.a(heapops_basic.o)
+                0x00000000000060f0                __SEGGER_RTL_init_heap
+                0x0000000000006104                __text_end__ = (__text_start__ + SIZEOF (.text))
+                0x0000000000005d38                __text_size__ = SIZEOF (.text)
+                0x0000000000006104                __text_load_end__ = __text_end__
 
 .vfp11_veneer   0x0000000100000000        0x0
  .vfp11_veneer  0x0000000100000000        0x0 linker stubs
@@ -8303,59 +8303,59 @@ Linker script and memory map
 .iplt           0x0000000100000000        0x0
  .iplt          0x0000000100000000        0x0 Output/Debug/Obj/breadcrumb/thumb_crt0.o
                 0x0000000000000001                . = ASSERT (((__text_start__ == __text_end__) || ((__text_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .text is too large to fit in FLASH1 memory segment)
-                0x0000000000006110                __log_const_data_load_start__ = ALIGN (__text_end__, 0x4)
+                0x0000000000006104                __log_const_data_load_start__ = ALIGN (__text_end__, 0x4)
 
 .log_const_data
-                0x0000000000006110        0x0
-                0x0000000000006110                __log_const_data_start__ = .
-                0x0000000000006110                __start_log_const_data = __log_const_data_start__
+                0x0000000000006104        0x0
+                0x0000000000006104                __log_const_data_start__ = .
+                0x0000000000006104                __start_log_const_data = __log_const_data_start__
  *(SORT_BY_NAME(.log_const_data*))
-                0x0000000000006110                __log_const_data_end__ = (__log_const_data_start__ + SIZEOF (.log_const_data))
+                0x0000000000006104                __log_const_data_end__ = (__log_const_data_start__ + SIZEOF (.log_const_data))
                 0x0000000000000000                __log_const_data_size__ = SIZEOF (.log_const_data)
-                0x0000000000006110                __stop_log_const_data = __log_const_data_end__
-                0x0000000000006110                __log_const_data_load_end__ = __log_const_data_end__
+                0x0000000000006104                __stop_log_const_data = __log_const_data_end__
+                0x0000000000006104                __log_const_data_load_end__ = __log_const_data_end__
                 0x0000000000000001                . = ASSERT (((__log_const_data_start__ == __log_const_data_end__) || ((__log_const_data_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .log_const_data is too large to fit in FLASH1 memory segment)
-                0x0000000000006110                __log_backends_load_start__ = ALIGN (__log_const_data_end__, 0x4)
+                0x0000000000006104                __log_backends_load_start__ = ALIGN (__log_const_data_end__, 0x4)
 
-.log_backends   0x0000000000006110        0x0
-                0x0000000000006110                __log_backends_start__ = .
-                0x0000000000006110                __start_log_backends = __log_backends_start__
+.log_backends   0x0000000000006104        0x0
+                0x0000000000006104                __log_backends_start__ = .
+                0x0000000000006104                __start_log_backends = __log_backends_start__
  *(SORT_BY_NAME(.log_backends*))
-                0x0000000000006110                __log_backends_end__ = (__log_backends_start__ + SIZEOF (.log_backends))
+                0x0000000000006104                __log_backends_end__ = (__log_backends_start__ + SIZEOF (.log_backends))
                 0x0000000000000000                __log_backends_size__ = SIZEOF (.log_backends)
-                0x0000000000006110                __stop_log_backends = __log_backends_end__
-                0x0000000000006110                __log_backends_load_end__ = __log_backends_end__
+                0x0000000000006104                __stop_log_backends = __log_backends_end__
+                0x0000000000006104                __log_backends_load_end__ = __log_backends_end__
                 0x0000000000000001                . = ASSERT (((__log_backends_start__ == __log_backends_end__) || ((__log_backends_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .log_backends is too large to fit in FLASH1 memory segment)
-                0x0000000000006110                __nrf_balloc_load_start__ = ALIGN (__log_backends_end__, 0x4)
+                0x0000000000006104                __nrf_balloc_load_start__ = ALIGN (__log_backends_end__, 0x4)
 
-.nrf_balloc     0x0000000000006110        0x0
-                0x0000000000006110                __nrf_balloc_start__ = .
-                0x0000000000006110                __start_nrf_balloc = __nrf_balloc_start__
+.nrf_balloc     0x0000000000006104        0x0
+                0x0000000000006104                __nrf_balloc_start__ = .
+                0x0000000000006104                __start_nrf_balloc = __nrf_balloc_start__
  *(.nrf_balloc*)
-                0x0000000000006110                __nrf_balloc_end__ = (__nrf_balloc_start__ + SIZEOF (.nrf_balloc))
+                0x0000000000006104                __nrf_balloc_end__ = (__nrf_balloc_start__ + SIZEOF (.nrf_balloc))
                 0x0000000000000000                __nrf_balloc_size__ = SIZEOF (.nrf_balloc)
-                0x0000000000006110                __stop_nrf_balloc = __nrf_balloc_end__
-                0x0000000000006110                __nrf_balloc_load_end__ = __nrf_balloc_end__
+                0x0000000000006104                __stop_nrf_balloc = __nrf_balloc_end__
+                0x0000000000006104                __nrf_balloc_load_end__ = __nrf_balloc_end__
                 0x0000000000000001                . = ASSERT (((__nrf_balloc_start__ == __nrf_balloc_end__) || ((__nrf_balloc_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .nrf_balloc is too large to fit in FLASH1 memory segment)
-                0x0000000000006110                __nrf_sections_load_start__ = ALIGN (__nrf_balloc_end__, 0x4)
+                0x0000000000006104                __nrf_sections_load_start__ = ALIGN (__nrf_balloc_end__, 0x4)
 
-.nrf_sections   0x0000000000006110        0x0
-                0x0000000000006110                __nrf_sections_start__ = .
-                0x0000000000006110                __start_nrf_sections = __nrf_sections_start__
+.nrf_sections   0x0000000000006104        0x0
+                0x0000000000006104                __nrf_sections_start__ = .
+                0x0000000000006104                __start_nrf_sections = __nrf_sections_start__
  *(.nrf_sections .nrf_sections.*)
-                0x0000000000006110                __nrf_sections_end__ = (__nrf_sections_start__ + SIZEOF (.nrf_sections))
+                0x0000000000006104                __nrf_sections_end__ = (__nrf_sections_start__ + SIZEOF (.nrf_sections))
                 0x0000000000000000                __nrf_sections_size__ = SIZEOF (.nrf_sections)
-                0x0000000000006110                __nrf_sections_load_end__ = __nrf_sections_end__
+                0x0000000000006104                __nrf_sections_load_end__ = __nrf_sections_end__
                 0x0000000000000001                . = ASSERT (((__nrf_sections_start__ == __nrf_sections_end__) || ((__nrf_sections_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .nrf_sections is too large to fit in FLASH1 memory segment)
-                0x0000000000006110                __log_dynamic_data_load_start__ = ALIGN (__nrf_sections_end__, 0x4)
+                0x0000000000006104                __log_dynamic_data_load_start__ = ALIGN (__nrf_sections_end__, 0x4)
 
 .log_dynamic_data
-                0x0000000020000000        0x0 load address 0x0000000000006110
+                0x0000000020000000        0x0 load address 0x0000000000006104
                 0x0000000020000000                __log_dynamic_data_start__ = .
  *(SORT_BY_NAME(.log_dynamic_data*))
                 0x0000000020000000                __log_dynamic_data_end__ = (__log_dynamic_data_start__ + SIZEOF (.log_dynamic_data))
                 0x0000000000000000                __log_dynamic_data_size__ = SIZEOF (.log_dynamic_data)
-                0x0000000000006110                __log_dynamic_data_load_end__ = (__log_dynamic_data_load_start__ + SIZEOF (.log_dynamic_data))
+                0x0000000000006104                __log_dynamic_data_load_end__ = (__log_dynamic_data_load_start__ + SIZEOF (.log_dynamic_data))
                 0x0000000000000001                . = ASSERT (((__log_dynamic_data_load_start__ == __log_dynamic_data_load_end__) || ((__log_dynamic_data_load_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .log_dynamic_data is too large to fit in FLASH1 memory segment)
 
 .log_dynamic_data_run
@@ -8367,15 +8367,15 @@ Linker script and memory map
                 0x0000000020000000                __stop_log_dynamic_data = __log_dynamic_data_run_end__
                 0x0000000020000000                __log_dynamic_data_run_load_end__ = __log_dynamic_data_run_end__
                 0x0000000000000001                . = ASSERT (((__log_dynamic_data_run_start__ == __log_dynamic_data_run_end__) || ((__log_dynamic_data_run_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__)), error: .log_dynamic_data_run is too large to fit in RAM1 memory segment)
-                0x0000000000006110                __log_filter_data_load_start__ = ALIGN ((__log_dynamic_data_load_start__ + SIZEOF (.log_dynamic_data)), 0x4)
+                0x0000000000006104                __log_filter_data_load_start__ = ALIGN ((__log_dynamic_data_load_start__ + SIZEOF (.log_dynamic_data)), 0x4)
 
 .log_filter_data
-                0x0000000020000000        0x0 load address 0x0000000000006110
+                0x0000000020000000        0x0 load address 0x0000000000006104
                 0x0000000020000000                __log_filter_data_start__ = .
  *(SORT_BY_NAME(.log_filter_data*))
                 0x0000000020000000                __log_filter_data_end__ = (__log_filter_data_start__ + SIZEOF (.log_filter_data))
                 0x0000000000000000                __log_filter_data_size__ = SIZEOF (.log_filter_data)
-                0x0000000000006110                __log_filter_data_load_end__ = (__log_filter_data_load_start__ + SIZEOF (.log_filter_data))
+                0x0000000000006104                __log_filter_data_load_end__ = (__log_filter_data_load_start__ + SIZEOF (.log_filter_data))
                 0x0000000000000001                . = ASSERT (((__log_filter_data_load_start__ == __log_filter_data_load_end__) || ((__log_filter_data_load_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .log_filter_data is too large to fit in FLASH1 memory segment)
 
 .log_filter_data_run
@@ -8398,140 +8398,140 @@ Linker script and memory map
                 0x0000000000000000                __nrf_sections_run_end_size__ = SIZEOF (.nrf_sections_run_end)
                 0x0000000020000000                __nrf_sections_run_end_load_end__ = __nrf_sections_run_end_end__
                 0x0000000000000001                . = ASSERT (((__nrf_sections_run_end_start__ == __nrf_sections_run_end_end__) || ((__nrf_sections_run_end_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__)), error: .nrf_sections_run_end is too large to fit in RAM1 memory segment)
-                0x0000000000006110                __dtors_load_start__ = ALIGN ((__log_filter_data_load_start__ + SIZEOF (.log_filter_data)), 0x4)
+                0x0000000000006104                __dtors_load_start__ = ALIGN ((__log_filter_data_load_start__ + SIZEOF (.log_filter_data)), 0x4)
 
-.dtors          0x0000000000006110        0x0
-                0x0000000000006110                __dtors_start__ = .
+.dtors          0x0000000000006104        0x0
+                0x0000000000006104                __dtors_start__ = .
  *(SORT_BY_NAME(.dtors.*))
  *(.dtors)
  *(.fini_array)
  *(SORT_BY_NAME(.fini_array.*))
-                0x0000000000006110                __dtors_end__ = (__dtors_start__ + SIZEOF (.dtors))
+                0x0000000000006104                __dtors_end__ = (__dtors_start__ + SIZEOF (.dtors))
                 0x0000000000000000                __dtors_size__ = SIZEOF (.dtors)
-                0x0000000000006110                __dtors_load_end__ = __dtors_end__
+                0x0000000000006104                __dtors_load_end__ = __dtors_end__
                 0x0000000000000001                . = ASSERT (((__dtors_start__ == __dtors_end__) || ((__dtors_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .dtors is too large to fit in FLASH1 memory segment)
-                0x0000000000006110                __ctors_load_start__ = ALIGN (__dtors_end__, 0x4)
+                0x0000000000006104                __ctors_load_start__ = ALIGN (__dtors_end__, 0x4)
 
-.ctors          0x0000000000006110        0x0
-                0x0000000000006110                __ctors_start__ = .
+.ctors          0x0000000000006104        0x0
+                0x0000000000006104                __ctors_start__ = .
  *(SORT_BY_NAME(.ctors.*))
  *(.ctors)
  *(.init_array)
  *(SORT_BY_NAME(.init_array.*))
-                0x0000000000006110                __ctors_end__ = (__ctors_start__ + SIZEOF (.ctors))
+                0x0000000000006104                __ctors_end__ = (__ctors_start__ + SIZEOF (.ctors))
                 0x0000000000000000                __ctors_size__ = SIZEOF (.ctors)
-                0x0000000000006110                __ctors_load_end__ = __ctors_end__
+                0x0000000000006104                __ctors_load_end__ = __ctors_end__
                 0x0000000000000001                . = ASSERT (((__ctors_start__ == __ctors_end__) || ((__ctors_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .ctors is too large to fit in FLASH1 memory segment)
-                0x0000000000006110                __rodata_load_start__ = ALIGN (__ctors_end__, 0x4)
+                0x0000000000006104                __rodata_load_start__ = ALIGN (__ctors_end__, 0x4)
 
-.rodata         0x0000000000006110      0x5dc
-                0x0000000000006110                __rodata_start__ = .
+.rodata         0x0000000000006104      0x5cc
+                0x0000000000006104                __rodata_start__ = .
  *(.rodata .rodata.* .gnu.linkonce.r.*)
- .rodata        0x0000000000006110       0x4e Output/Debug/Obj/breadcrumb/boards.o
- *fill*         0x000000000000615e        0x2 
+ .rodata        0x0000000000006104       0x4e Output/Debug/Obj/breadcrumb/boards.o
+ *fill*         0x0000000000006152        0x2 
  .rodata.m_board_led_list
-                0x0000000000006160        0x4 Output/Debug/Obj/breadcrumb/boards.o
+                0x0000000000006154        0x4 Output/Debug/Obj/breadcrumb/boards.o
  .rodata.m_board_btn_list
-                0x0000000000006164        0x4 Output/Debug/Obj/breadcrumb/boards.o
+                0x0000000000006158        0x4 Output/Debug/Obj/breadcrumb/boards.o
  .rodata.SIMPLE_TIMER
-                0x0000000000006168        0x8 Output/Debug/Obj/breadcrumb/app_simple_timer.o
-                0x0000000000006168                SIMPLE_TIMER
- .rodata        0x0000000000006170       0x40 Output/Debug/Obj/breadcrumb/app_simple_timer.o
- .rodata        0x00000000000061b0       0x39 Output/Debug/Obj/breadcrumb/app_util_platform.o
- *fill*         0x00000000000061e9        0x3 
- .rodata        0x00000000000061ec       0x82 Output/Debug/Obj/breadcrumb/nrfx_gpiote.o
- *fill*         0x000000000000626e        0x2 
- .rodata        0x0000000000006270       0x59 Output/Debug/Obj/breadcrumb/nrfx_timer.o
- *fill*         0x00000000000062c9        0x3 
+                0x000000000000615c        0x8 Output/Debug/Obj/breadcrumb/app_simple_timer.o
+                0x000000000000615c                SIMPLE_TIMER
+ .rodata        0x0000000000006164       0x40 Output/Debug/Obj/breadcrumb/app_simple_timer.o
+ .rodata        0x00000000000061a4       0x39 Output/Debug/Obj/breadcrumb/app_util_platform.o
+ *fill*         0x00000000000061dd        0x3 
+ .rodata        0x00000000000061e0       0x82 Output/Debug/Obj/breadcrumb/nrfx_gpiote.o
+ *fill*         0x0000000000006262        0x2 
+ .rodata        0x0000000000006264       0x59 Output/Debug/Obj/breadcrumb/nrfx_timer.o
+ *fill*         0x00000000000062bd        0x3 
  .rodata.preambleCodeList
-                0x00000000000062cc        0x4 Output/Debug/Obj/breadcrumb/main.o
- .rodata        0x00000000000062d0       0x99 Output/Debug/Obj/breadcrumb/main.o
- *fill*         0x0000000000006369        0x3 
- .rodata        0x000000000000636c       0x17 Output/Debug/Obj/breadcrumb/SEGGER_RTT.o
- *fill*         0x0000000000006383        0x1 
+                0x00000000000062c0        0x4 Output/Debug/Obj/breadcrumb/main.o
+ .rodata        0x00000000000062c4       0x99 Output/Debug/Obj/breadcrumb/main.o
+ *fill*         0x000000000000635d        0x3 
+ .rodata        0x0000000000006360       0x17 Output/Debug/Obj/breadcrumb/SEGGER_RTT.o
+ *fill*         0x0000000000006377        0x1 
  .rodata._aV2C.0
-                0x0000000000006384       0x10 Output/Debug/Obj/breadcrumb/SEGGER_RTT_printf.o
+                0x0000000000006378       0x10 Output/Debug/Obj/breadcrumb/SEGGER_RTT_printf.o
  .rodata.chan_idx
-                0x0000000000006394        0x8 Output/Debug/Obj/breadcrumb/deca_params_init.o
-                0x0000000000006394                chan_idx
+                0x0000000000006388        0x8 Output/Debug/Obj/breadcrumb/deca_params_init.o
+                0x0000000000006388                chan_idx
  .rodata.tx_config
-                0x000000000000639c       0x18 Output/Debug/Obj/breadcrumb/deca_params_init.o
-                0x000000000000639c                tx_config
+                0x0000000000006390       0x18 Output/Debug/Obj/breadcrumb/deca_params_init.o
+                0x0000000000006390                tx_config
  .rodata.fs_pll_cfg
-                0x00000000000063b4       0x18 Output/Debug/Obj/breadcrumb/deca_params_init.o
-                0x00000000000063b4                fs_pll_cfg
+                0x00000000000063a8       0x18 Output/Debug/Obj/breadcrumb/deca_params_init.o
+                0x00000000000063a8                fs_pll_cfg
  .rodata.fs_pll_tune
-                0x00000000000063cc        0x6 Output/Debug/Obj/breadcrumb/deca_params_init.o
-                0x00000000000063cc                fs_pll_tune
- *fill*         0x00000000000063d2        0x2 
+                0x00000000000063c0        0x6 Output/Debug/Obj/breadcrumb/deca_params_init.o
+                0x00000000000063c0                fs_pll_tune
+ *fill*         0x00000000000063c6        0x2 
  .rodata.rx_config
-                0x00000000000063d4        0x2 Output/Debug/Obj/breadcrumb/deca_params_init.o
-                0x00000000000063d4                rx_config
- *fill*         0x00000000000063d6        0x2 
+                0x00000000000063c8        0x2 Output/Debug/Obj/breadcrumb/deca_params_init.o
+                0x00000000000063c8                rx_config
+ *fill*         0x00000000000063ca        0x2 
  .rodata.agc_config
-                0x00000000000063d8        0x8 Output/Debug/Obj/breadcrumb/deca_params_init.o
-                0x00000000000063d8                agc_config
+                0x00000000000063cc        0x8 Output/Debug/Obj/breadcrumb/deca_params_init.o
+                0x00000000000063cc                agc_config
  .rodata.dwnsSFDlen
-                0x00000000000063e0        0x3 Output/Debug/Obj/breadcrumb/deca_params_init.o
-                0x00000000000063e0                dwnsSFDlen
- *fill*         0x00000000000063e3        0x1 
- .rodata.sftsh  0x00000000000063e4        0xc Output/Debug/Obj/breadcrumb/deca_params_init.o
-                0x00000000000063e4                sftsh
+                0x00000000000063d4        0x3 Output/Debug/Obj/breadcrumb/deca_params_init.o
+                0x00000000000063d4                dwnsSFDlen
+ *fill*         0x00000000000063d7        0x1 
+ .rodata.sftsh  0x00000000000063d8        0xc Output/Debug/Obj/breadcrumb/deca_params_init.o
+                0x00000000000063d8                sftsh
  .rodata.dtune1
-                0x00000000000063f0        0x4 Output/Debug/Obj/breadcrumb/deca_params_init.o
-                0x00000000000063f0                dtune1
+                0x00000000000063e4        0x4 Output/Debug/Obj/breadcrumb/deca_params_init.o
+                0x00000000000063e4                dtune1
  .rodata.digital_bb_config
-                0x00000000000063f4       0x20 Output/Debug/Obj/breadcrumb/deca_params_init.o
-                0x00000000000063f4                digital_bb_config
+                0x00000000000063e8       0x20 Output/Debug/Obj/breadcrumb/deca_params_init.o
+                0x00000000000063e8                digital_bb_config
  .rodata.lde_replicaCoeff
-                0x0000000000006414       0x32 Output/Debug/Obj/breadcrumb/deca_params_init.o
-                0x0000000000006414                lde_replicaCoeff
- *fill*         0x0000000000006446        0x2 
- .rodata        0x0000000000006448       0x47 Output/Debug/Obj/breadcrumb/nrf_drv_common.o
- *fill*         0x000000000000648f        0x1 
- .rodata        0x0000000000006490       0x6c Output/Debug/Obj/breadcrumb/nrf_drv_spi.o
- .rodata        0x00000000000064fc       0x94 Output/Debug/Obj/breadcrumb/port_platform.o
- .rodata.spi    0x0000000000006590        0x8 Output/Debug/Obj/breadcrumb/port_platform.o
- *fill*         0x0000000000006598        0x8 
+                0x0000000000006408       0x32 Output/Debug/Obj/breadcrumb/deca_params_init.o
+                0x0000000000006408                lde_replicaCoeff
+ *fill*         0x000000000000643a        0x2 
+ .rodata        0x000000000000643c       0x47 Output/Debug/Obj/breadcrumb/nrf_drv_common.o
+ *fill*         0x0000000000006483        0x1 
+ .rodata        0x0000000000006484       0x6c Output/Debug/Obj/breadcrumb/nrf_drv_spi.o
+ .rodata        0x00000000000064f0       0x94 Output/Debug/Obj/breadcrumb/port_platform.o
+ .rodata.spi    0x0000000000006584        0x8 Output/Debug/Obj/breadcrumb/port_platform.o
+ *fill*         0x000000000000658c        0x4 
  .rodata.delay_machine_code.0
-                0x00000000000065a0        0x6 Output/Debug/Obj/breadcrumb/port_platform.o
- *fill*         0x00000000000065a6        0x2 
- .rodata        0x00000000000065a8       0x40 Output/Debug/Obj/breadcrumb/rtt_input.o
+                0x0000000000006590        0x6 Output/Debug/Obj/breadcrumb/port_platform.o
+ *fill*         0x0000000000006596        0x2 
+ .rodata        0x0000000000006598       0x40 Output/Debug/Obj/breadcrumb/rtt_input.o
  .rodata.preambleCodeList
-                0x00000000000065e8        0x4 Output/Debug/Obj/breadcrumb/uwb_bread.o
- .rodata        0x00000000000065ec       0xbb Output/Debug/Obj/breadcrumb/uwb_bread.o
- *fill*         0x00000000000066a7        0x1 
- .rodata        0x00000000000066a8       0x27 Output/Debug/Obj/breadcrumb/uwb_init.o
- *fill*         0x00000000000066cf        0x1 
- .rodata        0x00000000000066d0       0x12 Output/Debug/Obj/breadcrumb/uwb_rx.o
- *fill*         0x00000000000066e2        0x2 
- .rodata        0x00000000000066e4        0x8 Output/Debug/Obj/breadcrumb/uwb_tx.o
-                0x00000000000066ec                __rodata_end__ = (__rodata_start__ + SIZEOF (.rodata))
-                0x00000000000005dc                __rodata_size__ = SIZEOF (.rodata)
-                0x00000000000066ec                __rodata_load_end__ = __rodata_end__
+                0x00000000000065d8        0x4 Output/Debug/Obj/breadcrumb/uwb_bread.o
+ .rodata        0x00000000000065dc       0xbb Output/Debug/Obj/breadcrumb/uwb_bread.o
+ *fill*         0x0000000000006697        0x1 
+ .rodata        0x0000000000006698       0x27 Output/Debug/Obj/breadcrumb/uwb_init.o
+ *fill*         0x00000000000066bf        0x1 
+ .rodata        0x00000000000066c0        0x6 Output/Debug/Obj/breadcrumb/uwb_rx.o
+ *fill*         0x00000000000066c6        0x2 
+ .rodata        0x00000000000066c8        0x8 Output/Debug/Obj/breadcrumb/uwb_tx.o
+                0x00000000000066d0                __rodata_end__ = (__rodata_start__ + SIZEOF (.rodata))
+                0x00000000000005cc                __rodata_size__ = SIZEOF (.rodata)
+                0x00000000000066d0                __rodata_load_end__ = __rodata_end__
 
-.rel.dyn        0x00000000000066ec        0x0
- .rel.iplt      0x00000000000066ec        0x0 Output/Debug/Obj/breadcrumb/thumb_crt0.o
+.rel.dyn        0x00000000000066d0        0x0
+ .rel.iplt      0x00000000000066d0        0x0 Output/Debug/Obj/breadcrumb/thumb_crt0.o
                 0x0000000000000001                . = ASSERT (((__rodata_start__ == __rodata_end__) || ((__rodata_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .rodata is too large to fit in FLASH1 memory segment)
-                0x00000000000066ec                __ARM.exidx_load_start__ = ALIGN (__rodata_end__, 0x4)
+                0x00000000000066d0                __ARM.exidx_load_start__ = ALIGN (__rodata_end__, 0x4)
 
-.ARM.exidx      0x00000000000066ec        0x0
-                0x00000000000066ec                __ARM.exidx_start__ = .
-                0x00000000000066ec                __exidx_start = __ARM.exidx_start__
+.ARM.exidx      0x00000000000066d0        0x0
+                0x00000000000066d0                __ARM.exidx_start__ = .
+                0x00000000000066d0                __exidx_start = __ARM.exidx_start__
  *(.ARM.exidx .ARM.exidx.*)
-                0x00000000000066ec                __ARM.exidx_end__ = (__ARM.exidx_start__ + SIZEOF (.ARM.exidx))
+                0x00000000000066d0                __ARM.exidx_end__ = (__ARM.exidx_start__ + SIZEOF (.ARM.exidx))
                 0x0000000000000000                __ARM.exidx_size__ = SIZEOF (.ARM.exidx)
-                0x00000000000066ec                __exidx_end = __ARM.exidx_end__
-                0x00000000000066ec                __ARM.exidx_load_end__ = __ARM.exidx_end__
+                0x00000000000066d0                __exidx_end = __ARM.exidx_end__
+                0x00000000000066d0                __ARM.exidx_load_end__ = __ARM.exidx_end__
                 0x0000000000000001                . = ASSERT (((__ARM.exidx_start__ == __ARM.exidx_end__) || ((__ARM.exidx_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .ARM.exidx is too large to fit in FLASH1 memory segment)
-                0x00000000000066ec                __fast_load_start__ = ALIGN (__ARM.exidx_end__, 0x4)
+                0x00000000000066d0                __fast_load_start__ = ALIGN (__ARM.exidx_end__, 0x4)
 
-.fast           0x0000000020000000        0x0 load address 0x00000000000066ec
+.fast           0x0000000020000000        0x0 load address 0x00000000000066d0
                 0x0000000020000000                __fast_start__ = .
  *(.fast .fast.*)
                 0x0000000020000000                __fast_end__ = (__fast_start__ + SIZEOF (.fast))
                 0x0000000000000000                __fast_size__ = SIZEOF (.fast)
-                0x00000000000066ec                __fast_load_end__ = (__fast_load_start__ + SIZEOF (.fast))
+                0x00000000000066d0                __fast_load_end__ = (__fast_load_start__ + SIZEOF (.fast))
                 0x0000000000000001                . = ASSERT (((__fast_load_start__ == __fast_load_end__) || ((__fast_load_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .fast is too large to fit in FLASH1 memory segment)
 
 .fast_run       0x0000000020000000        0x0
@@ -8540,9 +8540,9 @@ Linker script and memory map
                 0x0000000000000000                __fast_run_size__ = (__fast_run_end__ - __fast_run_start__)
                 0x0000000020000000                __fast_run_load_end__ = __fast_run_end__
                 0x0000000000000001                . = ASSERT (((__fast_run_start__ == __fast_run_end__) || ((__fast_run_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__)), error: .fast_run is too large to fit in RAM1 memory segment)
-                0x00000000000066ec                __data_load_start__ = ALIGN ((__fast_load_start__ + SIZEOF (.fast)), 0x4)
+                0x00000000000066d0                __data_load_start__ = ALIGN ((__fast_load_start__ + SIZEOF (.fast)), 0x4)
 
-.data           0x0000000020000000       0x64 load address 0x00000000000066ec
+.data           0x0000000020000000       0x64 load address 0x00000000000066d0
                 0x0000000020000000                __data_start__ = .
  *(.data .data.* .gnu.linkonce.d.*)
  .data.SystemCoreClock
@@ -8565,7 +8565,7 @@ Linker script and memory map
  .data.config   0x0000000020000058        0xc Output/Debug/Obj/breadcrumb/uwb_init.o
                 0x0000000020000064                __data_end__ = (__data_start__ + SIZEOF (.data))
                 0x0000000000000064                __data_size__ = SIZEOF (.data)
-                0x0000000000006750                __data_load_end__ = (__data_load_start__ + SIZEOF (.data))
+                0x0000000000006734                __data_load_end__ = (__data_load_start__ + SIZEOF (.data))
 
 .igot.plt       0x0000000100000000        0x0
  .igot.plt      0x0000000100000000        0x0 Output/Debug/Obj/breadcrumb/thumb_crt0.o
@@ -8577,16 +8577,16 @@ Linker script and memory map
                 0x0000000000000064                __data_run_size__ = (__data_run_end__ - __data_run_start__)
                 0x0000000020000064                __data_run_load_end__ = __data_run_end__
                 0x0000000000000001                . = ASSERT (((__data_run_start__ == __data_run_end__) || ((__data_run_end__ - __RAM1_segment_start__) <= __RAM1_segment_size__)), error: .data_run is too large to fit in RAM1 memory segment)
-                0x0000000000006750                __tdata_load_start__ = ALIGN ((__data_load_start__ + SIZEOF (.data)), 0x4)
+                0x0000000000006734                __tdata_load_start__ = ALIGN ((__data_load_start__ + SIZEOF (.data)), 0x4)
 
-.tdata          0x0000000020000064        0x0 load address 0x0000000000006750
+.tdata          0x0000000020000064        0x0 load address 0x0000000000006734
                 0x0000000020000064                __tdata_start__ = .
  *(.tdata .tdata.*)
                 0x0000000020000064                __tdata_end__ = (__tdata_start__ + SIZEOF (.tdata))
                 0x0000000000000000                __tdata_size__ = SIZEOF (.tdata)
-                0x0000000000006750                __tdata_load_end__ = (__tdata_load_start__ + SIZEOF (.tdata))
-                0x0000000000006750                __FLASH1_segment_used_end__ = (ALIGN ((__data_load_start__ + SIZEOF (.data)), 0x4) + SIZEOF (.tdata))
-                0x0000000000006750                __FLASH1_segment_used_size__ = (__FLASH1_segment_used_end__ - __FLASH1_segment_start__)
+                0x0000000000006734                __tdata_load_end__ = (__tdata_load_start__ + SIZEOF (.tdata))
+                0x0000000000006734                __FLASH1_segment_used_end__ = (ALIGN ((__data_load_start__ + SIZEOF (.data)), 0x4) + SIZEOF (.tdata))
+                0x0000000000006734                __FLASH1_segment_used_size__ = (__FLASH1_segment_used_end__ - __FLASH1_segment_start__)
                 0x0000000000000001                . = ASSERT (((__tdata_load_start__ == __tdata_load_end__) || ((__tdata_load_end__ - __FLASH1_segment_start__) <= __FLASH1_segment_size__)), error: .tdata is too large to fit in FLASH1 memory segment)
 
 .tdata_run      0x0000000020000064        0x0
@@ -8920,7 +8920,7 @@ LOAD linker stubs
  .note.GNU-stack
                 0x0000000000000000        0x0 C:/Program Files/SEGGER/SEGGER Embedded Studio for ARM 6.34a/lib/libc_v7em_fpv4_sp_d16_hard_t_le_eabi_balanced.a(strops.o)
 
-.debug_line     0x0000000000000000    0x133a5
+.debug_line     0x0000000000000000    0x133a4
  .debug_line    0x0000000000000000      0x17e Output/Debug/Obj/breadcrumb/thumb_crt0.o
  .debug_line    0x000000000000017e      0xa2c Output/Debug/Obj/breadcrumb/boards.o
  .debug_line    0x0000000000000baa      0x3f5 Output/Debug/Obj/breadcrumb/app_error.o
@@ -8948,9 +8948,9 @@ LOAD linker stubs
  .debug_line    0x000000000001025b      0x4e7 Output/Debug/Obj/breadcrumb/rtt_input.o
  .debug_line    0x0000000000010742      0xbcd Output/Debug/Obj/breadcrumb/uwb_bread.o
  .debug_line    0x000000000001130f      0x949 Output/Debug/Obj/breadcrumb/uwb_init.o
- .debug_line    0x0000000000011c58      0x8de Output/Debug/Obj/breadcrumb/uwb_rx.o
- .debug_line    0x0000000000012536      0x895 Output/Debug/Obj/breadcrumb/uwb_tx.o
- .debug_line    0x0000000000012dcb      0x5da Output/Debug/Obj/breadcrumb/flash_util.o
+ .debug_line    0x0000000000011c58      0x8dd Output/Debug/Obj/breadcrumb/uwb_rx.o
+ .debug_line    0x0000000000012535      0x895 Output/Debug/Obj/breadcrumb/uwb_tx.o
+ .debug_line    0x0000000000012dca      0x5da Output/Debug/Obj/breadcrumb/flash_util.o
 
 .debug_info     0x0000000000000000    0x15739
  .debug_info    0x0000000000000000       0x22 Output/Debug/Obj/breadcrumb/thumb_crt0.o
