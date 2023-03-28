@@ -6,13 +6,15 @@ chunk_size = 124
 
 if __name__ == '__main__':
    
-    serial_no = '760150725'
+    serial_no = '760180907'
+   # serial_no = '760150725'
     #serial_no = '760150500'
     #serial_no = '760180685'
     #serial_no = '760150700'
     #serial_no = '760150575'
 
     jlink = pylink.JLink()
+    #jlink = pylink.JLink(lib=pylink.library.Library("C:\Program Files (x86)\SEGGER\JLink\JLink_x64.dll"))
     jlink.open(serial_no)
     jlink.connect('nRF52832_xxAA', verbose=True)
     jlink.rtt_start()
@@ -27,7 +29,7 @@ if __name__ == '__main__':
 
     while not doneReading:
 
-        time.sleep(0.05)
+        time.sleep(0.08)
 
         #code to read rtt stream
         raw_bytes = jlink.rtt_read(0,2048)

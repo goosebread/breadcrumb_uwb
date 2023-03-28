@@ -159,6 +159,7 @@ void doRanging(void){
     }
     changePreambleCode(preambleCodeList[pcitx], preambleCodeList[pcirx]);
     dwt_setrxtimeout(0);
+    interrupt_flag=false;
 }
 
 void rangeRequest(void)

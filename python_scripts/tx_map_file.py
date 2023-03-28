@@ -1,5 +1,5 @@
 MAX_PACKET_LENGTH = 127 #124 bytes of useful data
-SLEEP_TIME = 0.05
+SLEEP_TIME = 0.08 #0.05 for one hop works
 
 import pylink
 import time
@@ -21,13 +21,14 @@ if __name__ == '__main__':
     #serial_no = '760150575'
 
     jlink = pylink.JLink()
+    #jlink = pylink.JLink(lib=pylink.library.Library("/opt/SEGGER/JLink_V786e/libjlinkarm.so.7.86.5"))
     jlink.open(serial_no)
     jlink.connect('nRF52832_xxAA', verbose=True)
     jlink.rtt_start()
     time.sleep(0.5) #need a bit of time for link to settle
 
-    #in_fname = "churchillarea.txt.gz" 
-    in_filename = "test.txt" 
+    in_filename = "churchillarea.txt.gz" 
+    #in_filename = "test.txt" 
 
     #header frame
     fsize = os.path.getsize(in_filename)

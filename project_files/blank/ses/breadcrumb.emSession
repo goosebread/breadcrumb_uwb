@@ -64,20 +64,20 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="208" useTextEdit="1" path="../../../main.c" left="0" top="198" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="114" useTextEdit="1" path="../../../breadcrumb_src/uwb_bread.c" left="0" top="108" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="58" y="12" useTextEdit="1" path="../../../breadcrumb_src/uwb_rx.c" left="0" top="6" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="23" y="10" useTextEdit="1" path="../../../breadcrumb_src/uwb_tx.c" left="0" top="8" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="208" useTextEdit="1" path="../../../main.c" left="0" selected="1" top="199" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="152" useTextEdit="1" path="../../../breadcrumb_src/uwb_bread.c" left="0" top="147" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="58" y="12" useTextEdit="1" path="../../../breadcrumb_src/uwb_rx.c" left="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="23" y="10" useTextEdit="1" path="../../../breadcrumb_src/uwb_tx.c" left="0" top="4" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../rtt_input/rtt_input.c" left="0" top="42" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="../../../../../../components/libraries/log/src/nrf_log_frontend.c" left="0" top="32" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="39" y="68" useTextEdit="1" openedFrom="C:/nrf_sdk/examples/myprojects/breadcrumb/main.c" path="../../../../../../modules/nrfx/hal/nrf_nvmc.h" left="0" top="68" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="13" y="4" useTextEdit="1" path="../../../breadcrumb_src/flash_util.c" left="0" top="0" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="19" y="10" useTextEdit="1" openedFrom="C:/nrf_sdk/examples/myprojects/breadcrumb/breadcrumb_src/flash_util.c" path="../../../breadcrumb_src/flash_util.h" left="0" top="2" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="101" useTextEdit="1" path="../../../../../../modules/nrfx/mdk/ses_startup_nrf_common.s" left="0" top="96" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="272" useTextEdit="1" path="../../../../../../modules/nrfx/drivers/src/nrfx_timer.c" left="0" selected="1" top="267" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="302" useTextEdit="1" path="../../../../../../modules/nrfx/drivers/src/nrfx_timer.c" left="0" top="290" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="120" useTextEdit="1" path="../../../deca_driver/port/port_platform.c" left="0" top="110" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="1066" useTextEdit="1" path="../../../deca_driver/deca_device.c" left="0" top="1056" codecName="Default"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="23" useTextEdit="1" openedFrom="C:/nrf_sdk/examples/myprojects/breadcrumb/main.c" path="../../../breadcrumb_src/uwb_init.c" left="0" top="13" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="6" y="13" useTextEdit="1" openedFrom="C:/nrf_sdk/examples/myprojects/breadcrumb/main.c" path="../../../breadcrumb_src/uwb_init.c" left="0" top="9" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="10" y="85" useTextEdit="1" path="../../../../../../external/segger_rtt/SEGGER_RTT.c" left="0" top="79" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="22" y="69" useTextEdit="1" openedFrom="C:/nrf_sdk/external/segger_rtt/SEGGER_RTT.c" path="../../../../../../external/segger_rtt/SEGGER_RTT.h" left="0" top="59" codecName="Default"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="C:/nrf_sdk/external/segger_rtt/SEGGER_RTT.h" path="../../../../../../external/segger_rtt/SEGGER_RTT_Conf.h" left="0" top="75" codecName="Default"/>
