@@ -31,9 +31,8 @@
 extern volatile bool interrupt_flag;
 extern volatile uint8_t rx_data_buffer[MAP_PACKET_LENGTH];
 
-static const uint8_t preambleCodeList[4] = {9,10,11,12};
-extern int pcitx;
-extern int pcirx;
+extern uint16_t address;
+
 
 //maybe also global buffer index for router queue buffer
 
@@ -46,6 +45,7 @@ extern int pcirx;
 #define APP_NAME "SS TWR INIT v1.3"
 
 /* Length of the common part of the message (up to and including the function code, see NOTE 1 below). */
+//no function code
 #define ALL_MSG_COMMON_LEN 10
 /* Indexes to access some of the fields in the frames defined above. */
 #define ALL_MSG_SN_IDX 2
@@ -69,7 +69,7 @@ extern int pcirx;
 // Not enough time to write the data so TX timeout extended for nRF operation.
 // Might be able to get away with 800 uSec but would have to test
 // See note 6 at the end of this file
-#define POLL_RX_TO_RESP_TX_DLY_UUS  1100
+#define POLL_RX_TO_RESP_TX_DLY_UUS  1300
 
 /* This is the delay from the end of the frame transmission to the enable of the receiver, as programmed for the DW1000's wait for response feature. */
 #define RESP_TX_TO_FINAL_RX_DLY_UUS 500
@@ -77,11 +77,12 @@ extern int pcirx;
 /* Speed of light in air, in metres per second. */
 #define SPEED_OF_LIGHT 299702547
 
+void updateMessageAddress(void);
+
 void readRTTBuf(void);
 void writeUWBFromRTT(void);
 void relayUWB(void);
 
-void changePreambleCode(uint8_t tx_code,uint8_t rx_code);
 void breadcrumb_dwm_init(void);
 
 void rxUWB(void);

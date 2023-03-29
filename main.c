@@ -85,44 +85,49 @@ static inline void led_write(uint32_t led_idx, bool val){
 
 //WARNING we will need to change how they are stored if preamble channel needs
 //more than a 2 bits
-void storeChannelSettings(){
-    uint32_t val2 = pcitx<<2;
-    uint32_t val = 0xFFFFFFF0+(pcitx<<2)+pcirx;
+void storeAddress(){
+    uint32_t val = 0xFFFF0000+address;
     writeWordFlash(val);
 }
 
-void loadChannelSettings(){
+void updateLED(){
+    led_write(BSP_BOARD_LED_3,address & 0x8);
+    led_write(BSP_BOARD_LED_2,address & 0x4);
+    led_write(BSP_BOARD_LED_1,address & 0x2);
+    led_write(BSP_BOARD_LED_0,address & 0x1);
+}
+
+void loadAddress(){
     uint32_t val = readWordFlash();
-    pcitx = (val&0x0000000C)>>2;
-    pcirx = (val&0x00000003);
-    led_write(BSP_BOARD_LED_3,pcitx & 0x2);
-    led_write(BSP_BOARD_LED_2,pcitx & 0x1);
-    led_write(BSP_BOARD_LED_1,pcirx & 0x2);
-    led_write(BSP_BOARD_LED_0,pcirx & 0x1);
-    changePreambleCode(preambleCodeList[pcitx], preambleCodeList[pcirx]);
+    address = (val&0x0000FFFF);
+    updateLED();
+    updateMessageAddress();
 }
 
 void case1fun(){
-            pcitx = (pcitx+1)% sizeof(preambleCodeList);
-            uint8_t np = preambleCodeList[pcitx];
-            changePreambleCode(np, preambleCodeList[pcirx]);
-            led_write(BSP_BOARD_LED_3,pcitx & 0x2);
-            led_write(BSP_BOARD_LED_2,pcitx & 0x1);
-            SEGGER_RTT_printf(0, "new tx preamble %d \n", np);
-            storeChannelSettings();
+            address = address-1; //unsigned int overflow/underflow just wraps around
+            updateLED();
+            SEGGER_RTT_printf(0, "new address %u \n", address);
+            storeAddress();
+            updateMessageAddress();
             interrupt_flag = false;
 }
 void case3fun(){
-            pcirx = (pcirx+1)% sizeof(preambleCodeList);
-            uint8_t np = preambleCodeList[pcirx];
-            changePreambleCode(preambleCodeList[pcitx],np);
-            led_write(BSP_BOARD_LED_1,pcirx & 0x2);
-            led_write(BSP_BOARD_LED_0,pcirx & 0x1);
-            SEGGER_RTT_printf(0, "new rx preamble %d \n", np);
-            storeChannelSettings();
+            address = address+1; //unsigned int overflow/underflow just wraps around
+            updateLED();
+            SEGGER_RTT_printf(0, "new address %u \n", address);
+            storeAddress();
+            updateMessageAddress();
             interrupt_flag = false;
 }
-
+void case5fun(){
+            address = 0; //unsigned int overflow/underflow just wraps around
+            updateLED();
+            SEGGER_RTT_printf(0, "new address %u \n", address);
+            storeAddress();
+            updateMessageAddress();
+            interrupt_flag = false;
+}
 
 static void button_event_handler(uint32_t button_number)
 {
@@ -162,6 +167,14 @@ static void button_event_handler(uint32_t button_number)
             break;
         }
 
+        case 5:
+        {   
+            SEGGER_RTT_printf(0, "Reset Address\n");
+            app_sched_event_put(NULL, 0, case5fun);
+            interrupt_flag = true;
+            break;
+        }
+
         default:
             SEGGER_RTT_printf(0, "Invalid Key\n");
             break;
@@ -171,7 +184,7 @@ static void button_event_handler(uint32_t button_number)
 //external rtt input. These events can just get scheduled accordingly
 static void app_rtt_input_handler(int key)
 {
-    if (key >= '1' && key <= '4')
+    if (key >= '1' && key <= '5')
     {
         uint32_t button_number = key - '0';
         SEGGER_RTT_printf(0, "Key %d\n", button_number);
@@ -196,7 +209,7 @@ static void initialize(void)
     bsp_board_init(BSP_INIT_LEDS);
 
     breadcrumb_dwm_init();
-    loadChannelSettings();
+    loadAddress();
 }
 
 static void start(void)

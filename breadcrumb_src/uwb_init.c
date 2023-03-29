@@ -1,8 +1,7 @@
 #include "uwb_bread.h"
 
 volatile bool interrupt_flag;
-int pcitx;
-int pcirx;
+uint16_t address;
 
 //pretty sure this is the same as tx. need to clean up
 static dwt_config_t config = {
@@ -17,16 +16,6 @@ static dwt_config_t config = {
     DWT_PHRMODE_STD, //  /* PHY header mode. */
     (129 + 8 - 8)     /* SFD timeout (preamble length + 1 + SFD length - PAC size). Used in RX only. */
 };
-
-//could probably optimize to not rely on a dwt read
-void changePreambleCode(uint8_t tx_code,uint8_t rx_code){
-    dwt_forcetrxoff();
-    uint32_t regval =  dwt_read32bitreg(CHAN_CTRL_ID)| // Use DW nsSFD
-              (CHAN_CTRL_TX_PCOD_MASK & (tx_code << CHAN_CTRL_TX_PCOD_SHIFT)) | // TX Preamble Code
-              (CHAN_CTRL_RX_PCOD_MASK & (rx_code << CHAN_CTRL_RX_PCOD_SHIFT)) ; // RX Preamble Code
-
-    dwt_write32bitreg(CHAN_CTRL_ID,regval) ;
-}
 
 void breadcrumb_dwm_init(){
 

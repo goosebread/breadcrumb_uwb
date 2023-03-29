@@ -13,10 +13,10 @@ void handleRxData(uint32_t frame_len){
             SEGGER_RTT_printf(0, "%x,",rx_data_buffer[i]);
         }
         SEGGER_RTT_printf(0, "\n");
-  uint8_t ttl = rx_data_buffer[0]--;
-  if(ttl){
+    uint8_t ttl = rx_data_buffer[0]--;
+    if(ttl){
         relayUWB();
-  }
+    }
 }
 
 void rxUWB(){

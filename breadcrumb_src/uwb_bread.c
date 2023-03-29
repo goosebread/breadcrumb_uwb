@@ -3,20 +3,18 @@
 //ranging code here
 
 
-
-
-
 //-----------------dw1000----------------------------
 
 
 //start of ss_init_main.c
 
 /* Frames used in the ranging process. See NOTE 1,2 below. */
-static uint8 tx_poll_msg[] = {0x41, 0x88, 0, 0xCA, 0xDE, 'P', 'U', 'R', 'Y', 0xE0, 0, 0};
-static uint8 rx_resp_msg[] = {0x41, 0x88, 0, 0xCA, 0xDE, 'R', 'Y', 'P', 'U', 0xE1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+//getting rid of function codes
+static uint8 poll_msg[] = {0x41, 0x88, 0, 0xCA, 0xDE, 0, 0, 0, 0, 0xE1, 0, 0};
+static uint8 resp_msg[] = {0x41, 0x88, 0, 0xCA, 0xDE, 0, 0, 0, 0, 0xE1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-static uint8 rx_poll_msg[] = {0x41, 0x88, 0, 0xCA, 0xDE, 'P', 'U', 'R', 'Y', 0xE0, 0, 0};
-static uint8 tx_resp_msg[] = {0x41, 0x88, 0, 0xCA, 0xDE, 'R', 'Y', 'P', 'U', 0xE1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+//static uint8 rx_poll_msg[] = {0x41, 0x88, 0, 0xCA, 0xDE, 'P', 'U', 'R', 'Y', 0xE0, 0, 0};
+//static uint8 tx_resp_msg[] = {0x41, 0x88, 0, 0xCA, 0xDE, 'R', 'Y', 'P', 'U', 0xE1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 /* Frame sequence number, incremented after each transmission to a specific node */
 static uint8 frame_seq_nb = 0;
@@ -48,24 +46,17 @@ static double dist_offset = 0.34282;
 
 /* Declaration of static functions. */
 static void resp_msg_get_ts(uint8_t *ts_field, uint32_t *ts);
-int target_node_select(int target_node);
+int target_node_select2(uint16_t target_node);
 int frame_incr(int target_node);
 void print_distance(int target_node);
 
 /*Transactions Counters */
 static volatile int tx_count = 0 ; // Successful transmit counter
 static volatile int rx_count = 0 ; // Successful receive counter 
-static int target_node = 0; //Target node selection index
+static uint16_t target_node = 0; //Target node selection index
 
 
 void rangeRequest(void);
-
-static void resp_msg_get_ts(uint8_t *ts_field, uint32_t *ts);
-//void ss_initiator_task_function (void * pvParameter);
-int target_node_select (int target_node);
-int frame_incr(int target_node);
-void print_distance(int target_node);
-
 
 /* Timestamps of frames transmission/reception.
 * As they are 40-bit wide, we need to define a 64-bit int type to handle them. */
@@ -84,16 +75,31 @@ static uint64 get_rx_timestamp_u64();
 *
 * @return none
 */
+void updateMessageAddress(){
+     poll_msg[SOURCE_ADDR_1] = (address&0xFF00)>>8;
+     poll_msg[SOURCE_ADDR_2] = (address&0x00FF);
+     resp_msg[DEST_ADDR_1] = (address&0xFF00)>>8;
+     resp_msg[DEST_ADDR_2] = (address&0x00FF);
+}
 
 //in progress
 void handleRxRanging(){
     SEGGER_RTT_printf(0, "ranging request received \n");
-    changePreambleCode(preambleCodeList[pcirx], preambleCodeList[pcirx]);
 
     /* Check that the frame is a poll sent by "SS TWR initiator" example.
      * As the sequence number field of the frame is not relevant, it is cleared to simplify the validation of the frame. */
     rx_data_buffer[ALL_MSG_SN_IDX] = 0;
-    if (memcmp(rx_data_buffer, rx_poll_msg, ALL_MSG_COMMON_LEN) == 0) {
+    
+    for(int i =0; i<ALL_MSG_COMMON_LEN;i++){
+        SEGGER_RTT_printf(0, "%u,",rx_data_buffer[i]);
+    }
+    SEGGER_RTT_printf(0, "\n");
+    for(int i =0; i<ALL_MSG_COMMON_LEN;i++){
+        SEGGER_RTT_printf(0, "%u,",resp_msg[i]);
+    }
+    SEGGER_RTT_printf(0, "\n");
+
+    if (memcmp(rx_data_buffer, resp_msg, ALL_MSG_COMMON_LEN-1) == 0) {
         // start  here
 
         uint32 resp_tx_time;
@@ -110,13 +116,13 @@ void handleRxRanging(){
         resp_tx_ts = (((uint64)(resp_tx_time & 0xFFFFFFFEUL)) << 8) + TX_ANT_DLY;
 
         /* Write all timestamps in the final message. See NOTE 8 below. */
-        resp_msg_set_ts(&tx_resp_msg[RESP_MSG_POLL_RX_TS_IDX], poll_rx_ts);
-        resp_msg_set_ts(&tx_resp_msg[RESP_MSG_RESP_TX_TS_IDX], resp_tx_ts);
+        resp_msg_set_ts(&resp_msg[RESP_MSG_POLL_RX_TS_IDX], poll_rx_ts);
+        resp_msg_set_ts(&resp_msg[RESP_MSG_RESP_TX_TS_IDX], resp_tx_ts);
 
         /* Write and send the response message. See NOTE 9 below. */
-        tx_resp_msg[ALL_MSG_SN_IDX] = rx_frame_seq_nb;
-        dwt_writetxdata(sizeof(tx_resp_msg), tx_resp_msg, 0); /* Zero offset in TX buffer. See Note 5 below.*/
-        dwt_writetxfctrl(sizeof(tx_resp_msg), 0, 1);          /* Zero offset in TX buffer, ranging. */
+        resp_msg[ALL_MSG_SN_IDX] = rx_frame_seq_nb;
+        dwt_writetxdata(sizeof(resp_msg), resp_msg, 0); /* Zero offset in TX buffer. See Note 5 below.*/
+        dwt_writetxfctrl(sizeof(resp_msg), 0, 1);          /* Zero offset in TX buffer, ranging. */
 
         //TODO fiddle around with these settings until its fixed. imm works but then the timing is off
         //ret = dwt_starttx(DWT_START_TX_DELAYED);
@@ -148,16 +154,13 @@ void handleRxRanging(){
             dwt_rxreset();
         }
     }
-    changePreambleCode(preambleCodeList[pcitx], preambleCodeList[pcirx]);
 }
 
 void doRanging(void){
-    changePreambleCode(preambleCodeList[pcitx], preambleCodeList[pcitx]);
     dwt_setrxtimeout(65000);
     for(int i=0; i<3; i++){
         rangeRequest();
     }
-    changePreambleCode(preambleCodeList[pcitx], preambleCodeList[pcirx]);
     dwt_setrxtimeout(0);
     interrupt_flag=false;
 }
@@ -175,13 +178,13 @@ void rangeRequest(void)
   SEGGER_RTT_printf(0, "node %d\n",target_node);
 
   /*Calling Function to select which node the Initiator will poll for a ranging response*/
-  target_node_select(target_node); 
+  target_node_select2(target_node); 
 
   /* Write frame data to DW1000 and prepare transmission. See NOTE 3 below. */
  // tx_poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb;
   dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_TXFRS);
-  dwt_writetxdata(sizeof(tx_poll_msg), tx_poll_msg, 0); /* Zero offset in TX buffer. */
-  dwt_writetxfctrl(sizeof(tx_poll_msg), 0, 1); /* Zero offset in TX buffer, ranging. */
+  dwt_writetxdata(sizeof(poll_msg), poll_msg, 0); /* Zero offset in TX buffer. */
+  dwt_writetxfctrl(sizeof(poll_msg), 0, 1); /* Zero offset in TX buffer, ranging. */
    // __LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "write tx\n");
 
   /* Start transmission, indicating that a response is expected so that reception is enabled automatically after the frame is sent and the delay
@@ -231,8 +234,17 @@ void rangeRequest(void)
 
     /* Check that the frame is the expected response from the companion "SS TWR responder" example.
     * As the sequence number field of the frame is not relevant, it is cleared to simplify the validation of the frame. */
-    rx_buffer[ALL_MSG_SN_IDX] = 0;
-    if (memcmp(rx_buffer, rx_resp_msg, ALL_MSG_COMMON_LEN) == 0)
+     //rx_buffer[ALL_MSG_SN_IDX] = 0;
+    for(int i =0; i<ALL_MSG_COMMON_LEN;i++){
+        SEGGER_RTT_printf(0, "%u,",rx_buffer[i]);
+    }
+    SEGGER_RTT_printf(0, "\n");
+    for(int i =0; i<ALL_MSG_COMMON_LEN;i++){
+        SEGGER_RTT_printf(0, "%u,",poll_msg[i]);
+    }
+    SEGGER_RTT_printf(0, "\n");
+
+    if (memcmp(rx_buffer, poll_msg, ALL_MSG_COMMON_LEN) == 0)
     {	
       rx_count++;
       //printf("Reception # : %d\r\n",rx_count);
@@ -255,17 +267,20 @@ void rangeRequest(void)
       rtd_init = resp_rx_ts - poll_tx_ts;
       rtd_resp = resp_tx_ts - poll_rx_ts;
 
+      SEGGER_RTT_printf(0, "rtd_init # %d\n",rtd_init);
+      SEGGER_RTT_printf(0, "rtd_resp # %d\n",rtd_resp);
+
       tof = ((rtd_init - rtd_resp * (1.0f - clockOffsetRatio)) / 2.0f) * DWT_TIME_UNITS; // Specifying 1.0f and 2.0f are floats to clear warning 
       distance_uncal = tof * SPEED_OF_LIGHT;
 
       /* Distance is transformed from the raw distance measurement to one with a scale and offset that prints range in meters*/
 
       distance = (distance_uncal*dist_scale)-dist_offset;
-    }
 
       /* Calling function to print ranges to correct node that we are ranging to */
 
-    print_distance(target_node);
+      print_distance(target_node);
+    }
   }
   else
   {
@@ -305,6 +320,15 @@ void ss_initiator_task_function (void * pvParameter)
   }
 }*/
 
+int target_node_select2 (uint16_t target_node)
+{
+         poll_msg[DEST_ADDR_1] = (target_node&0xFF00)>>8;
+         poll_msg[DEST_ADDR_2] = (target_node&0x00FF);
+         resp_msg[SOURCE_ADDR_1] = (target_node&0xFF00)>>8;
+         resp_msg[SOURCE_ADDR_2] = (target_node&0x00FF);
+         poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb_1;//TODO fix frame seq nb
+}
+
 int target_node_select (int target_node)
 {
 
@@ -313,103 +337,31 @@ int target_node_select (int target_node)
 
         if(target_node == 1) 
        {
-         tx_poll_msg[DEST_ADDR_1] = 'P';
-         tx_poll_msg[DEST_ADDR_2] = 'U';
-         rx_resp_msg[SOURCE_ADDR_1] = 'P';
-         rx_resp_msg[SOURCE_ADDR_2] = 'U';
-         tx_poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb_1;
+         poll_msg[DEST_ADDR_1] = 'P';
+         poll_msg[DEST_ADDR_2] = 'U';
+         resp_msg[SOURCE_ADDR_1] = 'P';
+         resp_msg[SOURCE_ADDR_2] = 'U';
+         poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb_1;
          //printf("Ranging to Pumpernickel %f\r\n"); // Was used for debugging
        }
         else if(target_node == 2)
        {
-         tx_poll_msg[DEST_ADDR_1] = 'C';
-         tx_poll_msg[DEST_ADDR_2] = 'H';
-         rx_resp_msg[SOURCE_ADDR_1] = 'C';
-         rx_resp_msg[SOURCE_ADDR_2] = 'H';
-         tx_poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb_2;
+         poll_msg[DEST_ADDR_1] = 'C';
+         poll_msg[DEST_ADDR_2] = 'H';
+         resp_msg[SOURCE_ADDR_1] = 'C';
+         resp_msg[SOURCE_ADDR_2] = 'H';
+         poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb_2;
          //printf("Ranging to Challah %f\r\n"); //Was used for debugging
        }
         else if(target_node == 3)
        {
-         tx_poll_msg[DEST_ADDR_1] = 'B';
-         tx_poll_msg[DEST_ADDR_2] = 'A';
-         rx_resp_msg[SOURCE_ADDR_1] = 'B';
-         rx_resp_msg[SOURCE_ADDR_2] = 'A';
-         tx_poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb_3;
+         poll_msg[DEST_ADDR_1] = 'B';
+         poll_msg[DEST_ADDR_2] = 'A';
+         resp_msg[SOURCE_ADDR_1] = 'B';
+         resp_msg[SOURCE_ADDR_2] = 'A';
+         poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb_3;
        }
-       /*
-        else if(target_node == 4)
-       {
-         tx_poll_msg[DEST_ADDR_1] = 'P';
-         tx_poll_msg[DEST_ADDR_2] = 'U';
-         rx_resp_msg[SOURCE_ADDR_1] = 'P';
-         rx_resp_msg[SOURCE_ADDR_2] = 'U';
-         tx_poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb_1;
-       }
-        else if(target_node == 5)
-       {
-         tx_poll_msg[DEST_ADDR_1] = 'C';
-         tx_poll_msg[DEST_ADDR_2] = 'H';
-         rx_resp_msg[SOURCE_ADDR_1] = 'C';
-         rx_resp_msg[SOURCE_ADDR_2] = 'H';
-         tx_poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb_2;
-       }
-        else if(target_node == 6)
-       {
-         tx_poll_msg[DEST_ADDR_1] = 'B';
-         tx_poll_msg[DEST_ADDR_2] = 'A';
-         rx_resp_msg[SOURCE_ADDR_1] = 'B';
-         rx_resp_msg[SOURCE_ADDR_2] = 'A';
-         tx_poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb_3;
-       }
-        else if(target_node == 7)
-       {
-         tx_poll_msg[DEST_ADDR_1] = 'P';
-         tx_poll_msg[DEST_ADDR_2] = 'U';
-         rx_resp_msg[SOURCE_ADDR_1] = 'P';
-         rx_resp_msg[SOURCE_ADDR_2] = 'U';
-         tx_poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb_1;
-       }
-        else if(target_node == 8)
-       {
-         tx_poll_msg[DEST_ADDR_1] = 'C';
-         tx_poll_msg[DEST_ADDR_2] = 'H';
-         rx_resp_msg[SOURCE_ADDR_1] = 'C';
-         rx_resp_msg[SOURCE_ADDR_2] = 'H';
-         tx_poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb_2;
-       }
-        else if(target_node == 9)
-       {
-         tx_poll_msg[DEST_ADDR_1] = 'B';
-         tx_poll_msg[DEST_ADDR_2] = 'A';
-         rx_resp_msg[SOURCE_ADDR_1] = 'B';
-         rx_resp_msg[SOURCE_ADDR_2] = 'A';
-         tx_poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb_3;
-       }
-        else if(target_node == 10)
-       {
-         tx_poll_msg[DEST_ADDR_1] = 'P';
-         tx_poll_msg[DEST_ADDR_2] = 'U';
-         rx_resp_msg[SOURCE_ADDR_1] = 'P';
-         rx_resp_msg[SOURCE_ADDR_2] = 'P';
-         tx_poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb_1;
-       }
-        else if(target_node == 11)
-       {
-         tx_poll_msg[DEST_ADDR_1] = 'C';
-         tx_poll_msg[DEST_ADDR_2] = 'H';
-         rx_resp_msg[SOURCE_ADDR_1] = 'C';
-         rx_resp_msg[SOURCE_ADDR_2] = 'H';
-         tx_poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb_2;
-       }
-        else if(target_node == 12)
-       {
-         tx_poll_msg[DEST_ADDR_1] = 'B';
-         tx_poll_msg[DEST_ADDR_2] = 'A';
-         rx_resp_msg[SOURCE_ADDR_1] = 'B';
-         rx_resp_msg[SOURCE_ADDR_2] = 'A';
-         tx_poll_msg[ALL_MSG_SN_IDX] = frame_seq_nb_3;
-       }*/
+
 }
 
 int frame_incr(int target_node)
@@ -468,7 +420,7 @@ int frame_incr(int target_node)
 }
 
 void print_distance(int target_node){
-    SEGGER_RTT_printf(0, "node %d, distance %d\n",target_node, (int)(1000*distance));
+    SEGGER_RTT_printf(0, "node %d, distance %d\n",target_node, (int)(1000000*distance));
 
 }
 void print_distance2(int target_node)
