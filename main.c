@@ -198,7 +198,8 @@ static void app_rtt_input_handler(int key)
 
 static void initialize(void)
 {
-    SEGGER_RTT_printf(0, "Breadcrumb :)\n");
+    //SEGGER_RTT_printf(0, "Breadcrumb :)\n");
+    
     //__LOG_INIT(LOG_SRC_APP | LOG_SRC_FRIEND, LOG_LEVEL_DBG1, LOG_CALLBACK_DEFAULT);
     //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "----- BLE Mesh Light Switch Server Demo -----\n");
 

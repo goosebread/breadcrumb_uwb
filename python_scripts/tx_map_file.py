@@ -27,7 +27,8 @@ if __name__ == '__main__':
     jlink.rtt_start()
     time.sleep(0.5) #need a bit of time for link to settle
 
-    in_filename = "churchillarea.txt.gz" 
+    in_filename = "tempfile.pk.gz"
+    #in_filename = "churchillarea.txt.gz" 
     #in_filename = "test.txt" 
 
     #header frame
@@ -35,6 +36,7 @@ if __name__ == '__main__':
     info_msg = "FILE_START "+in_filename+" "+str(fsize)+" "
     info_frame = b''.join([str.encode(prefix),ttl_byte, str.encode(info_msg),str.encode((chunk_size-len(info_msg)+2)*"\0")])
     jlink.rtt_write(0,info_frame)
+    print(info_frame)
     time.sleep(SLEEP_TIME)
 
     #data frames

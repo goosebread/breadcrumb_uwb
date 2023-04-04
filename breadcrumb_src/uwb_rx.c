@@ -9,10 +9,13 @@ static uint32 status_reg = 0;
 
 void handleRxData(uint32_t frame_len){
     //1 ttl byte, 2 crc bytes
-    for(int i=1;i<frame_len-2;i++){//hope this works and doesn't take forever
-            SEGGER_RTT_printf(0, "%x,",rx_data_buffer[i]);
-        }
-        SEGGER_RTT_printf(0, "\n");
+    //SEGGER_RTT_LOCK();
+    for(int i=1;i<frame_len-2;i++){//write data only
+        SEGGER_RTT_printf(0, "%.2x",rx_data_buffer[i]);
+    }
+    //SEGGER_RTT_printf(0, "\n");
+    //SEGGER_RTT_UNLOCK();
+
     uint8_t ttl = rx_data_buffer[0]--;
     if(ttl){
         relayUWB();
