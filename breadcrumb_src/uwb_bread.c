@@ -138,7 +138,7 @@ void handleRxRanging(){
             dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_TXFRS);
 
             /* Increment frame sequence number after transmission of the poll message (modulo 256). */
-            rx_frame_seq_nb++;
+            rx_frame_seq_nb=0;//TODO quick fix,not elegant. remove frame seq
 
         } else {
             /* If we end up in here then we have not succeded in transmitting the packet we sent up.
@@ -215,7 +215,7 @@ void rangeRequest(void)
     /* Calling function to increment frame of the correct node currently ranging to */
   //__LOG(LOG_SRC_APP, LOG_LEVEL_INFO, "frame rx or timeout");
 
-  frame_incr(target_node);
+  //frame_incr(target_node);//TODO remove frame seq
 
   if (status_reg & SYS_STATUS_RXFCG)
   {		
@@ -234,15 +234,15 @@ void rangeRequest(void)
 
     /* Check that the frame is the expected response from the companion "SS TWR responder" example.
     * As the sequence number field of the frame is not relevant, it is cleared to simplify the validation of the frame. */
-     //rx_buffer[ALL_MSG_SN_IDX] = 0;
-    for(int i =0; i<ALL_MSG_COMMON_LEN;i++){
+    //rx_buffer[ALL_MSG_SN_IDX] = 0;
+    /*for(int i =0; i<ALL_MSG_COMMON_LEN;i++){
         SEGGER_RTT_printf(0, "%u,",rx_buffer[i]);
     }
     SEGGER_RTT_printf(0, "\n");
     for(int i =0; i<ALL_MSG_COMMON_LEN;i++){
         SEGGER_RTT_printf(0, "%u,",poll_msg[i]);
     }
-    SEGGER_RTT_printf(0, "\n");
+    SEGGER_RTT_printf(0, "\n");*/
 
     if (memcmp(rx_buffer, poll_msg, ALL_MSG_COMMON_LEN) == 0)
     {	
