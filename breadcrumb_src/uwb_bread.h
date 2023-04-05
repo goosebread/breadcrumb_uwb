@@ -69,7 +69,7 @@ extern uint16_t address;
 // Not enough time to write the data so TX timeout extended for nRF operation.
 // Might be able to get away with 800 uSec but would have to test
 // See note 6 at the end of this file
-#define POLL_RX_TO_RESP_TX_DLY_UUS  1300
+#define POLL_RX_TO_RESP_TX_DLY_UUS  2700
 
 /* This is the delay from the end of the frame transmission to the enable of the receiver, as programmed for the DW1000's wait for response feature. */
 #define RESP_TX_TO_FINAL_RX_DLY_UUS 500

@@ -84,20 +84,20 @@ void updateMessageAddress(){
 
 //in progress
 void handleRxRanging(){
-    SEGGER_RTT_printf(0, "ranging request received \n");
+    //SEGGER_RTT_printf(0, "ranging request received \n");
 
     /* Check that the frame is a poll sent by "SS TWR initiator" example.
      * As the sequence number field of the frame is not relevant, it is cleared to simplify the validation of the frame. */
     rx_data_buffer[ALL_MSG_SN_IDX] = 0;
     
-    for(int i =0; i<ALL_MSG_COMMON_LEN;i++){
+    /*for(int i =0; i<ALL_MSG_COMMON_LEN;i++){
         SEGGER_RTT_printf(0, "%u,",rx_data_buffer[i]);
     }
     SEGGER_RTT_printf(0, "\n");
     for(int i =0; i<ALL_MSG_COMMON_LEN;i++){
         SEGGER_RTT_printf(0, "%u,",resp_msg[i]);
     }
-    SEGGER_RTT_printf(0, "\n");
+    SEGGER_RTT_printf(0, "\n");*/
 
     if (memcmp(rx_data_buffer, resp_msg, ALL_MSG_COMMON_LEN-1) == 0) {
         // start  here
@@ -107,6 +107,7 @@ void handleRxRanging(){
 
         /* Retrieve poll reception timestamp. */
         poll_rx_ts = get_rx_timestamp_u64();
+        //SEGGER_RTT_printf(0, "rxts %u\n",poll_rx_ts);
 
         /* Compute final message transmission time. See NOTE 7 below. */
         resp_tx_time = (poll_rx_ts + (POLL_RX_TO_RESP_TX_DLY_UUS * UUS_TO_DWT_TIME)) >> 8;
@@ -114,6 +115,7 @@ void handleRxRanging(){
 
         /* Response TX timestamp is the transmission time we programmed plus the antenna delay. */
         resp_tx_ts = (((uint64)(resp_tx_time & 0xFFFFFFFEUL)) << 8) + TX_ANT_DLY;
+        //SEGGER_RTT_printf(0, "resp_tx_ts %u\n",resp_tx_ts);
 
         /* Write all timestamps in the final message. See NOTE 8 below. */
         resp_msg_set_ts(&resp_msg[RESP_MSG_POLL_RX_TS_IDX], poll_rx_ts);
@@ -125,14 +127,17 @@ void handleRxRanging(){
         dwt_writetxfctrl(sizeof(resp_msg), 0, 1);          /* Zero offset in TX buffer, ranging. */
 
         //TODO fiddle around with these settings until its fixed. imm works but then the timing is off
-        //ret = dwt_starttx(DWT_START_TX_DELAYED);
-        ret = dwt_starttx(DWT_START_TX_IMMEDIATE);
+        ret = dwt_starttx(DWT_START_TX_DELAYED);
+        //ret = dwt_starttx(DWT_START_TX_IMMEDIATE);
 
         /* If dwt_starttx() returns an error, abandon this ranging exchange and proceed to the next one. */
         if (ret == DWT_SUCCESS) {
             /* Poll DW1000 until TX frame sent event set. See NOTE 5 below. */
             while (!(dwt_read32bitreg(SYS_STATUS_ID) & SYS_STATUS_TXFRS)) {
             };
+            //uint32_t temp = dwt_readtxtimestamplo32();
+            //SEGGER_RTT_printf(0, "txts %u\n",temp);
+
 
             /* Clear TXFRS event. */
             dwt_write32bitreg(SYS_STATUS_ID, SYS_STATUS_TXFRS);
@@ -158,7 +163,7 @@ void handleRxRanging(){
 
 void doRanging(void){
     dwt_setrxtimeout(65000);
-    for(int i=0; i<3; i++){
+    for(int i=0; i<1; i++){
         rangeRequest();
     }
     dwt_setrxtimeout(0);
@@ -171,7 +176,7 @@ void rangeRequest(void)
 
   target_node++;
 
-  if(target_node >= 4)
+  if(target_node >= 1)//4)
   {
     target_node = 1;
   }
@@ -266,9 +271,10 @@ void rangeRequest(void)
       /* Compute time of flight and distance, using clock offset ratio to correct for differing local and remote clock rates */
       rtd_init = resp_rx_ts - poll_tx_ts;
       rtd_resp = resp_tx_ts - poll_rx_ts;
-
-      SEGGER_RTT_printf(0, "rtd_init # %d\n",rtd_init);
-      SEGGER_RTT_printf(0, "rtd_resp # %d\n",rtd_resp);
+      SEGGER_RTT_printf(0, "%u\n",poll_tx_ts);
+      SEGGER_RTT_printf(0, "%u\n",resp_rx_ts);
+      SEGGER_RTT_printf(0, "%u\n",poll_rx_ts);
+      SEGGER_RTT_printf(0, "%u\n",resp_tx_ts);
 
       tof = ((rtd_init - rtd_resp * (1.0f - clockOffsetRatio)) / 2.0f) * DWT_TIME_UNITS; // Specifying 1.0f and 2.0f are floats to clear warning 
       distance_uncal = tof * SPEED_OF_LIGHT;
